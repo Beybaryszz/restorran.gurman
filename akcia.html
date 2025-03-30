@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Акции и Спецпредложения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        header {
+            background-color: #ffaa00;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .promo-box {
+            background-color: #ffdd44;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            width: 80%;
+            max-width: 400px;
+            font-size: 18px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .generate-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ffaa00;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .generate-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .bonus-section {
+            margin-top: 40px;
+            background-color: #ffb300;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .bonus-item {
+            background-color: #ffdd44;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="file:///C:/Users/Tabaldy%20Beybarys/Downloads/restoran/menu.html" class="back-button">Назад</a>
+        Акции и Спецпредложения
+    </header>
+    <div class="container">
+        <h2>Получите уникальную скидку!</h2>
+        <div class="promo-box" id="promoBox">Нажмите кнопку, чтобы узнать свою скидку!</div>
+        <button class="generate-button" id="discountButton" onclick="generateDiscount()">Получить скидку</button>
+    </div>
+    
+    <div class="bonus-section">
+        <h3>Дополнительные бонусы!</h3>
+        <div class="bonus-item">Бесплатный кофе при заказе от 500₽</div>
+        <div class="bonus-item">Скидка 20% на вторую пиццу</div>
+        <div class="bonus-item">Подарок-сюрприз при заказе от 1000₽</div>
+        <div class="bonus-item">Двойные бонусы на карту лояльности</div>
+    </div>
+    
+    <script>
+        function generateDiscount() {
+            let discounts = ["Скидка 5%", "Скидка 10%", "Скидка 15%", "Скидка 20%", "Скидка 25%", "Скидка 50%", "Скидка 100%!"];
+            let randomIndex = Math.floor(Math.random() * discounts.length);
+            let discountValue = discounts[randomIndex];
+            
+            localStorage.setItem("userDiscount", discountValue);
+            document.getElementById("promoBox").innerText = "Ваша скидка: " + discountValue;
+            document.getElementById("promoBox").style.opacity = "1";
+            document.getElementById("discountButton").disabled = true;
+        }
+
+        window.onload = function() {
+            let savedDiscount = localStorage.getItem("userDiscount");
+            if (savedDiscount) {
+                document.getElementById("promoBox").innerText = "Ваша скидка: " + savedDiscount;
+                document.getElementById("promoBox").style.opacity = "1";
+                document.getElementById("discountButton").disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>

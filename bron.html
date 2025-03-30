@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бронирование | Ресторан "Гурман"</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #ffd700;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .back-link {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .reservation-form {
+            background-color: white;
+            width: 50%;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .reservation-form input, .reservation-form select, .reservation-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .reservation-form button {
+            background-color: #ffd700;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .reservation-form button:hover {
+            background-color: #e6c200;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="file:///C:/Users/Tabaldy%20Beybarys/Downloads/restoran/menu.html" class="back-link">Назад</a>
+        📅 Бронирование | Ресторан "Гурман" 📅
+    </header>
+    <div class="reservation-form">
+        <h2>Забронировать столик</h2>
+        <form action="#" method="post">
+            <input type="text" name="name" placeholder="Ваше имя" required>
+            <input type="tel" name="phone" placeholder="Номер телефона" required>
+            <input type="date" name="date" required>
+            <input type="time" name="time" required>
+            <select name="guests" required>
+                <option value="1">1 гость</option>
+                <option value="2">2 гостя</option>
+                <option value="3">3 гостя</option>
+                <option value="4">4 гостя</option>
+                <option value="5">5 гостей</option>
+                <option value="6">6 гостей</option>
+            </select>
+            <button type="submit">Забронировать</button>
+        </form>
+    </div>
+</body>
+</html>

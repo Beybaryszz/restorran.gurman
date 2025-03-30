@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши фирменные сыры | Ресторан "Гурман"</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: linear-gradient(90deg, #ffcc00, #ff9900);
+            padding: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            letter-spacing: 1.5px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        .content {
+            width: 80%;
+            margin: 30px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+        .content h2 {
+            color: #cc6600;
+            font-size: 26px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .cheese-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        .cheese-gallery img {
+            width: 320px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .cheese-gallery img:hover {
+            transform: scale(1.05);
+        }
+        .history {
+            margin-top: 40px;
+            text-align: justify;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #444;
+        }
+        .history img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #ff9900;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background-color: #cc6600;
+        }
+    </style>
+</head>
+<body>
+    <header>🧀 Наши фирменные сыры | Ресторан "Гурман" 🧀</header>
+    <div class="content">
+        <h2>Лучшие сыры мира</h2>
+        <p>Мы гордимся тем, что предлагаем нашим гостям изысканные сыры, произведённые лучшими мировыми и местными сыродельнями.</p>
+        <div class="cheese-gallery">
+            <img src="data:image/jpeg;base64,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" alt="Камамбер">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb2EI5K1W00Fs6LbF9K7VMsOvMaTbyEEZpXA&s" alt="Бри">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwhsV_4KZP3BgBToOtxIYdZHXa2OCq53AtuA&s" alt="Буррата">
+        </div>
+        <h2>Наша история</h2>
+        <p class="history">Амир и Бейбарыс – два выдающихся шеф-повара, чьи имена стали синонимом высокой кухни. Они начали свой путь с небольшой сырной лавки, превращая традиционные рецепты в уникальные кулинарные произведения. Их страсть к гастрономии и преданность качеству сделали ресторан "Гурман" местом, где сыр становится настоящим искусством.</p>
+        <img src="c:\Users\Tabaldy Beybarys\Downloads\Изображение WhatsApp 2025-02-24 в 13.48.24_e8e328c7.jpg" alt="Шеф-повара ресторана">
+        <a href="file:///C:/Users/Tabaldy%20Beybarys/Downloads/restoran/menu.html" class="button">Вернуться на главную</a>
+    </div>
+</body>
+</html>

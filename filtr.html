@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <header>
+        <a href="javascript:history.back()" class="file:///C:/Users/Tabaldy%20Beybarys/Downloads/restoran/menu.html">← Назад</a>
+    </header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню и Корзина | Ресторан "Гурман"</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f8f8f8; color: #333; }
+        header { background-color: #ffd700; padding: 20px; text-align: center; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
+        .search-bar { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .search-bar input, .filter-select { padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; }
+        .menu-category { margin-top: 30px; }
+        .category-title { font-size: 28px; margin: 20px 0 10px; text-decoration: underline; color: #444; }
+        .menu { display: flex; flex-wrap: wrap; justify-content: space-around; }
+        .dish { background-color: white; width: 280px; margin: 15px; padding: 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; cursor: pointer; }
+        .dish:hover { transform: translateY(-10px); }
+        .dish img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; }
+        .dish h2 { font-size: 20px; margin-top: 10px; color: #333; }
+        .dish .price { font-size: 18px; font-weight: bold; color: #000; }
+        .cart-section { background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top: 20px; }
+        .cart-item { display: flex; align-items: center; margin-bottom: 10px; }
+        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 10px; margin-right: 15px; }
+        .checkout-button { display: block; background-color: #ffd700; color: #333; text-align: center; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 18px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <header>Меню ресторана "Гурман"</header>
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Поиск блюд...">
+            <select id="filterPrice" class="filter-select">
+                <option value="all">Все цены</option>
+                <option value="low">До 500 тенге</option>
+                <option value="medium">500-1000 тенге</option>
+                <option value="high">Свыше 1000 тенге</option>
+            </select>
+        </div>
+
+        <div class="menu-category">
+            <h2 class="category-title">Супы</h2>
+            <div class="menu" id="soups"></div>
+        </div>
+
+        <div class="menu-category">
+            <h2 class="category-title">Салаты</h2>
+            <div class="menu" id="salads"></div>
+        </div>
+
+        <div class="menu-category">
+            <h2 class="category-title">Десерты</h2>
+            <div class="menu" id="desserts"></div>
+        </div>
+
+        <h2>Корзина</h2>
+        <div class="cart-section" id="cartContainer">
+            <p>Ваша корзина пуста.</p>
+        </div>
+        <button class="checkout-button" id="checkoutButton">Перейти к оплате</button>
+    </div>
+
+    <script>
+        const dishes = [
+            { name: "Борщ", price: 450, category: "soups", imageUrl: "https://primebeef.ru/images/cms/data/3-501.jpg" },
+            { name: "Солянка", price: 550, category: "soups", imageUrl: "https://menunedeli.ru/wp-content/uploads/2023/10/EA99BF64-3920-455F-9BAF-EDB2E8B2F9AD-scaled.jpeg" },
+            { name: "Куриный суп", price: 400, category: "soups", imageUrl: "https://ferma-m2.ru/images/shop/recipe_image/crop__3_1.jpg" },
+            { name: "Окрошка", price: 350, category: "soups", imageUrl: "https://static.insales-cdn.com/images/articles/1/7683/1129987/%D0%BE%D0%BA%D1%80%D0%BE%D1%88%D0%BA%D0%B0.jpg" },
+            { name: "Греческий салат", price: 550, category: "salads", imageUrl: "https://art-lunch.ru/content/uploads/2018/07/Greek_salad.jpg" },
+            { name: "Цезарь", price: 650, category: "salads", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDSojWAaV2CgMY4oXHlK0Yv03fYvAk3_hYdA&s" },
+            { name: "Шоколадный торт", price: 700, category: "desserts", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStCuIHH5W69Im0rvHffq3YAFVkFlLWC0EqKA&s" },
+            { name: "Чизкейк", price: 800, category: "desserts", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcJpoiR5YKAzfJNsXofOgm0TcGYEuYmVZ4LA&s" },
+            { name: "Тирамису", price: 850, category: "desserts", imageUrl: "https://art-lunch.ru/wp-content/uploads/2014/10/Tiramisu_01.jpg" }
+        ];
+
+        const cart = [];
+
+        function renderDishes(filteredDishes = dishes) {
+            const categories = { soups: [], salads: [], desserts: [] };
+            filteredDishes.forEach(dish => categories[dish.category].push(dish));
+
+            for (let category in categories) {
+                const menuSection = document.getElementById(category);
+                menuSection.innerHTML = "";
+                categories[category].forEach(dish => {
+                    const dishElement = document.createElement("div");
+                    dishElement.classList.add("dish");
+                    dishElement.innerHTML = `<img src="${dish.imageUrl}" alt="${dish.name}"><h2>${dish.name}</h2><p class="price">Цена: ${dish.price} тенге</p>`;
+                    dishElement.addEventListener("click", () => addToCart(dish));
+                    menuSection.appendChild(dishElement);
+                });
+            }
+        }
+
+        function addToCart(dish) {
+            cart.push(dish);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartContainer = document.getElementById("cartContainer");
+            cartContainer.innerHTML = cart.length ? cart.map(item => `<div class="cart-item"><img src="${item.imageUrl}" alt="${item.name}"><div>${item.name} - ${item.price} тенге</div></div>`).join('') : "<p>Ваша корзина пуста.</p>";
+        }
+
+        document.getElementById("checkoutButton").addEventListener("click", () => {
+            const total = cart.reduce((sum, dish) => sum + dish.price, 0);
+            alert(`Общая сумма: ${total} тенге, И ваш код заказа gg`  );
+            window.location.href = "file:///C:/Users/Tabaldy%20Beybarys/Downloads/restoran/oplata.html";
+        });
+
+        document.getElementById("searchInput").addEventListener("input", filterDishes);
+        document.getElementById("filterPrice").addEventListener("change", filterDishes);
+
+        function filterDishes() {
+            const searchValue = document.getElementById("searchInput").value.toLowerCase();
+            const priceFilter = document.getElementById("filterPrice").value;
+
+            const filteredDishes = dishes.filter(dish => {
+                const matchesName = dish.name.toLowerCase().includes(searchValue);
+                const matchesPrice = (priceFilter === "low" && dish.price <= 500) ||
+                    (priceFilter === "medium" && dish.price > 500 && dish.price <= 1000) ||
+                    (priceFilter === "high" && dish.price > 1000) || priceFilter === "all";
+
+                return matchesName && matchesPrice;
+            });
+
+            renderDishes(filteredDishes);
+        }
+
+        renderDishes();
+    </script>
+</body>
+</html>
